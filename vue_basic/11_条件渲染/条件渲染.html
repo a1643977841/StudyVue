@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>条件渲染</title>
+    <script src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="root">
+      <!-- 使用v-if为条件指令 -->
+      <h2 v-if="boo">欢迎来到{{name}}</h2>
+      <h2 v-else-if="!boo">欢迎来到{{name}}</h2>
+      <!-- 使用v-show为条件指令 -->
+      <h2 v-show="boo">欢迎来到{{name}}</h2>
+      <!-- template只能配合v-if使用，不能用v-show -->
+      <template v-if="!boo">
+        <h1>重庆</h1>
+        <h1>上海</h1>
+        <h1>北京</h1>
+      </template>
+      <button @click="showMessage">显示/隐藏</button>
+    </div>
+
+    <script type="text/javascript">
+      Vue.config.productionTip = false
+      let vm = new Vue({
+        el: '#root',
+        data() {
+          return {
+            name: '重庆',
+            boo: true
+          }
+        },
+        methods: {
+          showMessage() {
+            this.boo = !this.boo
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

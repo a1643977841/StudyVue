@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>回顾Object.defineProperty方法</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      // 第一种给对象添加属性方式
+      let person = {
+        name: 'ahao',
+        sex: '男',
+        age: '20'
+      }
+      // 第二种给对象添加属性方式
+      let person2 = {
+        name: 'ahao',
+        sex: '男'
+      }
+      let number = 22
+      Object.defineProperty(person2, 'age', {
+        /* value: 100,
+        enumerable: true, // 控制属性是否可以被枚举,默认为false
+        writable: true, // 控制属性是否可以被修改, 默认为false
+        configurable: true // 控制属性是否可以被删除, 默认为false */
+        // 当每次读取person的age属性的时候, get() 就会被调用
+        get() {
+          console.log('读取了number')
+          return number
+        },
+        // 当每次修改person的age属性的时候, set() 就会被调用,并且会收到改变后的值
+        set(value) {
+          console.log('修改了age，值是：' + value)
+        }
+      })
+      console.log(Object.keys(person))
+      console.log(Object.keys(person2))
+      console.log(person2)
+    </script>
+  </body>
+</html>

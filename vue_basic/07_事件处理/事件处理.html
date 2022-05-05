@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="../js/vue.js"></script>
+    <title>事件处理</title>
+  </head>
+
+  <body>
+    <div id="root">
+      <h2>hello {{name}}</h2>
+      <button v-on:click="showInfo1">点我提示1</button>
+      <!-- 简写 -->
+      <button @click="showInfo2(this,77)">点我提示2</button>
+      <button @click="showInfo3($event,77)">点我提示3</button>
+    </div>
+  </body>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          name: 'ahao'
+        }
+      },
+      methods: {
+        showInfo1(event) {
+          console.log('hello  ' + this.name)
+          console.log(event)
+          // 此处的this 就是vm的实例
+          console.log(this)
+        },
+        // 会有一个bug,就是原本的默认参数event就拿不到了,可以参考showInfo3方法
+        showInfo2(_this, number) {
+          // 此时的this是window
+          console.log(_this)
+          console.log(number)
+        },
+        // 与showInfo2传参不同
+        showInfo3(enevt, number) {
+          console.log(enevt)
+          console.log(number)
+        }
+      }
+    })
+  </script>
+</html>

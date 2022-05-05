@@ -1,0 +1,74 @@
+$browser-default-font-size: 16px !default;
+$default-bg: #1a232e;
+$default-color: #243040;
+$color-1: #262f40;
+$color-2: #232937;
+$icon-size: 32px;
+@function pxTorem($px) {
+	@return $px / $browser-default-font-size * 1rem;
+}
+.btn, .btn:focus,.btn:active,.form-control:focus,.form-check-input:focus,.form-select:focus {
+  box-shadow: none !important;
+}
+.row {
+	//--bs-gutter-x: 0.625rem;
+}
+a {
+	text-decoration: none;
+	color: #555;
+	&:hover {
+		color: $default-color;
+	}
+}
+.index body {
+	background: url(../image/top-header.jpg) no-repeat top center;
+	background-size: contain;
+}
+.index, .index body {
+	height: 100%;
+}
+.directory {
+	.h1 {
+		border-bottom: 2px solid #1a232e;
+		font-size: pxTorem(18px);
+		font-weight: 700;
+	}
+	.list-group {
+		.list-group-item {
+			position: relative;
+			padding-left: pxTorem(26px);
+			font-weight: 700;
+			.iconfont {
+				font-size: pxTorem(20px);
+				margin-right: pxTorem(5px);
+				color: #0a53be;
+				position: absolute;
+				left: 0;
+				top: pxTorem(10px);
+				height: pxTorem(20px);
+				line-height: pxTorem(20px);
+			}
+		}
+	}
+}
+.header-bar {
+	background: #fff;
+	padding: pxTorem(16px) pxTorem(10px);
+	//position: relative;
+	border-bottom: 1px solid #ddd;
+	.back {
+		line-height: pxTorem(20px);
+		position: absolute;
+		left: pxTorem(10px);
+		top: 50%;
+		margin-top: pxTorem(-10px);
+		.iconfont {
+			font-size: pxTorem(20px);
+		}
+	}
+	h1 {
+		font-size: pxTorem(16px);
+		color: #333;
+		margin: 0;
+	}
+}

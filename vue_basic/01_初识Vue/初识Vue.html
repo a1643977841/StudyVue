@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../js/vue.js" type="text/javascript"></script>
+  <title>初识Vue</title>
+</head>
+
+<body>
+  <!-- 准备好一个容器-->
+  <div id="root">
+    <!-- 在花括号里面还可以写js表达式，例如三元运算表达式 -->
+    <h1>hello {{name}}</h1>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false; // 阻止Vue在启动时生产提示
+    new Vue({
+      el: '#root', // el用于指定当前Vue实例为哪个容器服务，通常为css选择器字符串
+      data() {
+        // data的数据只提供给el指定的容器使用
+        return {
+          name: 'ahao'
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>
