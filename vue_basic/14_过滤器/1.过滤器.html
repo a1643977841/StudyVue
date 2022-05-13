@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>过滤器</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root">
+      <h2>显示格式化后的时间</h2>
+      <!-- 过滤器适合简单逻辑的处理，如果逻辑比较复杂推荐使用计算属性 -->
+      <h3>现在是：{{time | timeFormater | sliceStrFour}}</h3>
+    </div>
+
+    <script type="text/javascript">
+      Vue.config.productionTip = false
+      // 全局过滤器
+      // Vue.filter('mySlice', function (value) {
+      //   return value.slice(0, 4)
+      // })
+      let vm = new Vue({
+        el: '#root',
+        data() {
+          return {
+            time: 0
+          }
+        },
+        /**
+         * 局部过滤器
+         */
+        filters: {
+          timeFormater(value, formatStr = 'YYYY年MM月DD日 HH:mm:ss') {
+            return dayjs(this.time).format(formatStr)
+          },
+          sliceStrFour(value) {
+            return value.slice(0, 4)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
