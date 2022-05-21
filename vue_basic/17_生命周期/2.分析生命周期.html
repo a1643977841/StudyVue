@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>引出生命周期</title>
+    <title>分析生命周期</title>
     <script src="../js/vue.js"></script>
   </head>
 
   <body>
     <div id="root">
       <h2 :style="{opacity}">欢迎</h2>
+      <button @click="destory()">点我销毁vm</button>
     </div>
 
     <script type="text/javascript">
@@ -22,12 +23,41 @@
             opacity: 1
           }
         },
+        methods: {
+          destory() {
+            this.$destroy()
+          }
+        },
+        beforeCreate() {
+          console.log('beforeCreate')
+        },
+        created() {
+          console.log('created')
+        },
+        beforeMount() {
+          console.log('beforeMount')
+          console.log(this)
+        },
         // Vue完成模板解析并且把真实dom元素放入页面后调用mounted()
         mounted() {
           setInterval(() => {
             this.opacity -= 0.01
             if (this.opacity <= 0) this.opacity = 1
           }, 16)
+        },
+        beforeUpdate() {
+          console.log('beforeUpdate')
+        },
+        updated() {
+          console.log('updated')
+        },
+        // 实例销毁之前
+        beforeDestroy() {
+          console.log('beforeDestroy')
+        },
+        // 实例销毁
+        destroyed() {
+          console.log('destroyed')
         }
       })
     </script>

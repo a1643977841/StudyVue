@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>VueComponent构造函数</title>
+    <script src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="root">
+      <!-- 
+        1.组件本质是一个名为VueComponent的构造函数，且不是程序员定义的，是从Vue.extend()方法生成的
+        2.只需要在写<school></school>标签的时候，Vue解析会自动帮我们创建<school>组件的实例对象
+          即执行new VueComponent(options)
+        3.特别注意：每次调用Vue.extend()返回的都是一个全新的VueComponent
+        4.this的指向：
+          (1)、组件配置中：
+            data函数、methods中的函数、watch中的函数、computed中的函数、他们的this均为VueComponent的实例对象
+          (2)、new Vue()配置中：
+            data函数、methods中的函数、watch中的函数、computed中的函数、他们的this均为Vue的实例对象
+       -->
+      <school></school>
+      <hr />
+      <student></student>
+    </div>
+
+    <script type="text/javascript">
+      Vue.config.productionTip = false
+      // 创建school组件
+      const school = Vue.extend({
+        template: `
+        <div>
+          <h2>学校名称：{{name}}</h2>
+          <h2>学校地址：{{address}}</h2>
+          <button @click="showName">点我显示</button>
+        </div>
+        `,
+        data() {
+          return {
+            name: '北京大学',
+            address: '北京'
+          }
+        },
+        methods: {
+          showName() {
+            console.log(this)
+          }
+        }
+      })
+      // 创建student组件
+      const student = Vue.extend({
+        template: `
+        <div>
+          <h2>学生名称：{{studentName}}</h2>
+          <h2>学生年龄：{{age}}</h2>
+        </div>
+        `,
+        data() {
+          return {
+            studentName: 'ahao',
+            age: 23
+          }
+        }
+      })
+      // 全局注册组件
+      // Vue.component('school', school)
+      // Vue.component('student', student)
+
+      // 创建vm
+      let vm = new Vue({
+        el: '#root',
+        // 注册组件
+        components: {
+          school,
+          student
+        },
+        data() {
+          return {
+            name: '北京大学',
+            address: '北京',
+            studentName: 'ahao',
+            age: 23
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

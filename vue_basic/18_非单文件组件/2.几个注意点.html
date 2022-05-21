@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>几个注意点</title>
+    <script src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="root">
+      <!-- 
+        1.组件名称定义要避免HTML本身预留的标签
+        2.多个单次可以使用大驼峰或者单词之间-链接，但注意大驼峰只有在脚手架环境中可以使用
+        3.使用自定义组件的时候可以使用简写自闭合形式，即<xxx /> 但在简单的HTML环境中存在后续组件标签无法被渲染的BUG，在脚手架中不存在此BUG
+        4.组件定义可以简写为const school = {}
+       -->
+      <school></school>
+      <hr />
+      <student></student>
+    </div>
+
+    <script type="text/javascript">
+      Vue.config.productionTip = false
+      // 创建school组件
+      const school = Vue.extend({
+        template: `
+        <div>
+          <h2>学校名称：{{name}}</h2>
+          <h2>学校地址：{{address}}</h2>  
+        </div>
+        `,
+        data() {
+          return {
+            name: '北京大学',
+            address: '北京'
+          }
+        }
+      })
+      // 创建student组件
+      const student = Vue.extend({
+        template: `
+        <div>
+          <h2>学生名称：{{studentName}}</h2>
+          <h2>学生年龄：{{age}}</h2>
+        </div>
+        `,
+        data() {
+          return {
+            studentName: 'ahao',
+            age: 23
+          }
+        }
+      })
+      // 全局注册组件
+      // Vue.component('school', school)
+      // Vue.component('student', student)
+
+      // 创建vm
+      let vm = new Vue({
+        el: '#root',
+        // 注册组件
+        components: {
+          school,
+          student
+        },
+        data() {
+          return {
+            name: '北京大学',
+            address: '北京',
+            studentName: 'ahao',
+            age: 23
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
